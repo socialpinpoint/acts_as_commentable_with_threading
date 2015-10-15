@@ -18,7 +18,7 @@ module Acts #:nodoc:
     def acts_as_commentable
       has_one :comment, :class_name => "Comment", :as => :commentable
       # Removing for now till we add back threaded comments
-     # before_destroy { |record| record.root_comments.destroy_all }
+      before_destroy { |record| record.comment.destroy }
       include Acts::CommentableWithThreading::LocalInstanceMethods
       extend Acts::CommentableWithThreading::SingletonMethods
     end
